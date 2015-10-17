@@ -1,4 +1,5 @@
-javascript: (function () {
+javascript: 'READ SELECTED';
+(function () {
     'use strict';
     var voices = window.speechSynthesis.getVoices();
     var sayit = function () {
@@ -6,7 +7,7 @@ javascript: (function () {
         msg.voice = voices[2];
         msg.voiceURI = 'native';
         msg.volume = 1;
-        msg.rate = 1.25;
+        msg.rate = 1.15;
         msg.pitch = 0.7;
         msg.lang = 'en-GB';
         msg.onstart = function (event) {
