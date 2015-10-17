@@ -1,5 +1,6 @@
 # SelectionSpeaker
 Read selected text out loud.
+![Mouth](http://static.tumblr.com/ed7773efa24a2fa46d24516373d65471/rjueldv/iV0mp7w6b/tumblr_static_fashion-girl-lips-lipstick-mouth-favim.com-73014.jpg)
 
 Text to speak functionality is already built in Chrome and no extension is needed. It's surprising that there's no keyboard shortcut just to read out loud what's selected. This micro project allows you to take your eyes off the screen.
 
