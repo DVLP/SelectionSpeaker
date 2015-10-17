@@ -24,4 +24,4 @@ To select an entire article which is a few pages long you don't have to drag you
 1. Click where you want your selection to start (nothing will happen, that's OK)
 2. Scroll down the page
 3. Hold Shift and click where the selection should end
-4. Boom! The selection has been made without dragging
+4. Boom! The selection has been selected without dragging
