@@ -1,15 +1,13 @@
 javascript:'READ SELECTED';
 (function () {
     'use strict';
-    var voices = window.speechSynthesis.getVoices();
     var sayit = function () {
         var msg = new SpeechSynthesisUtterance();
-        msg.voice = voices[2];
-        msg.voiceURI = 'native';
+        var voices = window.speechSynthesis.getVoices();
+        msg.voice = voices[0];
         msg.volume = 1;
         msg.rate = 1.15;
-        msg.pitch = 0.7;
-        msg.lang = 'en-GB';
+        msg.pitch = 1;
         msg.onstart = function (event) {
             console.log('started');
         };
@@ -27,8 +25,11 @@ javascript:'READ SELECTED';
         };
         return msg;
     };
-    var speekResponse = function (sel) {
-        var text = addPauses(sel).textContent;
+    var speekResponse = function (text) {
+        if (!window.speechSynthesis.getVoices().length)  {
+            setTimeout(() => speekResponse(text), 1000);
+            return;
+        }
         window.speechSynthesis.cancel();
         var sentences = text.split('.');
         for (var i = 0; i < sentences.length; i++) {
@@ -57,5 +58,21 @@ javascript:'READ SELECTED';
         }
         return el;
     }
-    speekResponse(window.getSelection());
+
+    function getPDFSelection(callback) {
+        var embed = document.querySelector('embed');
+        if (!embed) return;
+
+        function handler(event) {
+          if (event.data.type !== 'getSelectedTextReply') return;
+          window.removeEventListener('message', handler);
+          console.log(event.data.selectedText);
+          callback(event.data.selectedText.split(String.fromCharCode(10)).join(' '));
+        }
+        window.addEventListener('message', handler);
+        embed.postMessage({type: 'getSelectedText'}, String.fromCharCode(42));
+    }
+
+    if (window.getSelection().rangeCount) speekResponse(addPauses(window.getSelection()).textContent);
+    getPDFSelection(speekResponse);
 })();
